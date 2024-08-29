@@ -1,0 +1,6 @@
+body{margin-top:20px;}
+img, figure {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}

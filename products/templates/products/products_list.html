@@ -1,0 +1,56 @@
+{% extends 'products/base.html' %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<section class="py-5">
+<!--            <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0">-->
+<!--            <div class="card center" style="width: 18rem;">-->
+<!--                <a class="d-block" href="#"><img class="d-block" src="https://westerngrocer.com/wp-content/uploads/2016/10/Shopping-Cart-Logo-lg-891x1024.jpg" alt="Headphones"></a>-->
+<!--                <div class="card-body pb-2">-->
+<!--                    <h3 class="h6 mb-2">Categories</h3><span class="d-block mb-3 font-size-xs text-muted">Starting from <span class="font-weight-semibold">$2</span></span>-->
+<!--                    <div class="list-group list-group-flush font-size-sm">{% if not category %}<a class="list-group-item list-group-item-action" href="products:products_list">All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;"><polyline points="9 18 15 12 9 6"></polyline></svg></a>{% endif %}{% for c in categories %}<li class="list-group-item list-group-item-action" {% if category.slug == c.slug %}{% endif %}><a href="{{ c.get_absolute_url }}">{{ c.name }}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;"><polyline points="9 18 15 12 9 6"></polyline></svg></a>{% endfor %}</div>-->
+<!--                </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <h1 class="text-center">{% if category %}{{ category.title }}{% else %}Products{% endif %}</h1>
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for product in products %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{product.image.url}}" alt="..." height="150"  />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{product.name}}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through"></span>
+                                    ${{product.price}}
+                                </div>
+
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ product.get_absolute_url }}">View</a><form action="{% url 'cart:cart_add' product.id %}" class="btn btn-outline-dark mt-auto" method="post">Add</form></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

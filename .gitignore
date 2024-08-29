@@ -1,0 +1,11 @@
+# created by virtualenv automatically
+__pycache__/
+
+.idea
+.env.py
+.venv
+db.sqlite3
+products/migrations
+orders/migrstions
+cart/migrations
+images
